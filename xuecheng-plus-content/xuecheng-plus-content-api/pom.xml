@@ -8,8 +8,8 @@
     <name>xuecheng-plus-content-api</name>
     <description>xuecheng-plus-content-api</description>
     <parent>
+        <artifactId>xuecheng-plus-content</artifactId>
         <groupId>com.xuecheng</groupId>
-        <artifactId>xuecheng-plus-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <dependencies>

@@ -184,6 +184,7 @@
                 <artifactId>elasticsearch</artifactId>
                 <version>${elasticsearch.version}</version>
             </dependency>
+
         </dependencies>
 
     </dependencyManagement>
