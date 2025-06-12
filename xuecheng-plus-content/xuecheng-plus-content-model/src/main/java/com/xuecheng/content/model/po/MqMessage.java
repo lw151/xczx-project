@@ -77,7 +77,7 @@ public class MqMessage implements Serializable {
     */
     @Size(max= 2048,message="编码长度不能超过2048")
     @ApiModelProperty("回复失败内容")
-    @Length(max= 2,048,message="编码长度不能超过2,048")
+    @Length(max= 2048,message="编码长度不能超过2,048")
     private String returnfailureMsg;
     /**
     * 最近通知时间

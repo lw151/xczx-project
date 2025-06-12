@@ -44,14 +44,14 @@ public class CourseTeacher implements Serializable {
     */
     @Size(max= 1024,message="编码长度不能超过1024")
     @ApiModelProperty("教师简介")
-    @Length(max= 1,024,message="编码长度不能超过1,024")
+    @Length(max= 1024,message="编码长度不能超过1,024")
     private String introduction;
     /**
     * 照片
     */
     @Size(max= 1024,message="编码长度不能超过1024")
     @ApiModelProperty("照片")
-    @Length(max= 1,024,message="编码长度不能超过1,024")
+    @Length(max= 1024,message="编码长度不能超过1,024")
     private String photograph;
     /**
     * 创建时间
