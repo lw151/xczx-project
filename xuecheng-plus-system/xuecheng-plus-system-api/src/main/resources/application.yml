@@ -1,0 +1,10 @@
+server:
+  servlet:
+    context-path: /system
+  port: 63110
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.181.157:3306/xcplus_system?serverTimezone=UTC&userUnicode=true&useSSL=false&
+    username: root
+    password: l15170525589
