@@ -1,6 +1,8 @@
 package com.xuecheng.content.model.po;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
@@ -11,6 +13,8 @@ import java.io.Serializable;
 * 课程分类
 * @TableName course_category
 */
+@Data
+@AllArgsConstructor
 public class CourseCategory implements Serializable {
 
     /**

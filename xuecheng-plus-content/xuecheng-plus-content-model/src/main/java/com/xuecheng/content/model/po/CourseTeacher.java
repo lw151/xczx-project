@@ -1,6 +1,8 @@
 package com.xuecheng.content.model.po;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
@@ -12,6 +14,8 @@ import java.util.Date;
 * 课程-教师关系表
 * @TableName course_teacher
 */
+@Data
+@AllArgsConstructor
 public class CourseTeacher implements Serializable {
 
     /**
