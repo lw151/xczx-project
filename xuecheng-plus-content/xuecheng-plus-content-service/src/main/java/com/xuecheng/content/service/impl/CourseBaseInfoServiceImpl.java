@@ -3,6 +3,7 @@ package com.xuecheng.content.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xuecheng.base.exception.XueChengPlusException;
 import com.xuecheng.base.model.PageParams;
 import com.xuecheng.base.model.PageResult;
 import com.xuecheng.content.mapper.CourseBaseMapper;
@@ -34,6 +35,7 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseCategoryMapper,
     private CourseMarketMapper courseMarketMapper;
     @Autowired
     private CourseCategoryMapper courseCategoryMapper;
+
     /*
      * 分页查询课程信息
      * */
@@ -66,6 +68,19 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseCategoryMapper,
     @Override
     @Transactional(rollbackFor = Exception.class)
     public CourseBaseInfoDto createCourseBaseInfo(Long companyId, AddCourseDto addCourseDto) {
+
+        if (StringUtils.isEmpty(addCourseDto.getName())) {
+            XueChengPlusException.cast("课程名称不能为空");
+        }
+        if (addCourseDto.getPrice() <= 0) {
+            XueChengPlusException.cast("价格错误，请重新输入");
+        }
+        if (addCourseDto.getOriginalPrice() < 0) {
+            XueChengPlusException.cast("价格错误，请重新输入");
+        }
+        if(addCourseDto.getCharge()==null){
+            XueChengPlusException.cast("内容请完善");
+        }
         //向课程基本信息表course_base填入信息
         CourseBase newCourseBase = new CourseBase();
         BeanUtils.copyProperties(addCourseDto, newCourseBase);
@@ -81,7 +96,7 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseCategoryMapper,
         BeanUtils.copyProperties(addCourseDto, newCourseMarket);
         newCourseMarket.setId(newCourseBase.getId());
         int save = saveCourseMarket(newCourseMarket);
-        if(save<=0){
+        if (save <= 0) {
             throw new RuntimeException("保存失败");
         }
 
@@ -91,27 +106,27 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseCategoryMapper,
     /*保存课程营销数据*/
     private int saveCourseMarket(CourseMarket newCourseMarket) {
         String charge = newCourseMarket.getCharge();
-        if(StringUtils.isEmpty(charge)){
+        if (StringUtils.isEmpty(charge)) {
             throw new RuntimeException("收费规则为空");
         }
-        if(charge.equals("201001")){
-            if(StringUtils.isEmpty(newCourseMarket.getPrice())||newCourseMarket.getPrice()<=0){
+        if (charge.equals("201001")) {
+            if (StringUtils.isEmpty(newCourseMarket.getPrice()) || newCourseMarket.getPrice() <= 0) {
                 throw new RuntimeException("课程价格错误");
             }
         }
 
         CourseMarket selectCourseMarket = courseMarketMapper.selectById(newCourseMarket.getId());
-        if(selectCourseMarket==null){
+        if (selectCourseMarket == null) {
             return courseMarketMapper.insert(newCourseMarket);
-        }else {
+        } else {
             return courseMarketMapper.updateById(newCourseMarket);
         }
     }
 
     /*组装课程信息*/
-    private CourseBaseInfoDto getCourseBaseInfo(Long courseId){
+    private CourseBaseInfoDto getCourseBaseInfo(Long courseId) {
         CourseBase courseBase = courseBaseMapper.selectById(courseId);
-        if(courseBase==null){
+        if (courseBase == null) {
             return null;
         }
         CourseMarket courseMarket = courseMarketMapper.selectById(courseId);
