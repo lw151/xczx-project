@@ -3,12 +3,14 @@ package com.xuecheng.content.model.po;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -17,6 +19,7 @@ import java.util.Date;
 */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class CourseBase implements Serializable {
 
     /**
@@ -110,12 +113,12 @@ public class CourseBase implements Serializable {
     * 创建时间
     */
     @ApiModelProperty("创建时间")
-    private Date createDate;
+    private LocalDateTime createDate;
     /**
     * 修改时间
     */
     @ApiModelProperty("修改时间")
-    private Date changeDate;
+    private LocalDateTime changeDate;
     /**
     * 创建人
     */

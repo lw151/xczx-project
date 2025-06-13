@@ -3,6 +3,7 @@ package com.xuecheng.content.model.po;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
@@ -16,6 +17,7 @@ import java.io.Serializable;
 */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class CourseMarket implements Serializable {
 
     /**
@@ -36,12 +38,12 @@ public class CourseMarket implements Serializable {
     * 现价
     */
     @ApiModelProperty("现价")
-    private Double price;
+    private Float price;
     /**
     * 原价
     */
     @ApiModelProperty("原价")
-    private Double originalPrice;
+    private Float originalPrice;
     /**
     * 咨询qq
     */
@@ -68,118 +70,4 @@ public class CourseMarket implements Serializable {
     */
     @ApiModelProperty("有效期天数")
     private Integer validDays;
-
-    /**
-    * 主键，课程id
-    */
-    private void setId(Long id){
-    this.id = id;
-    }
-
-    /**
-    * 收费规则，对应数据字典
-    */
-    private void setCharge(String charge){
-    this.charge = charge;
-    }
-
-    /**
-    * 现价
-    */
-    private void setPrice(Double price){
-    this.price = price;
-    }
-
-    /**
-    * 原价
-    */
-    private void setOriginalPrice(Double originalPrice){
-    this.originalPrice = originalPrice;
-    }
-
-    /**
-    * 咨询qq
-    */
-    private void setQq(String qq){
-    this.qq = qq;
-    }
-
-    /**
-    * 微信
-    */
-    private void setWechat(String wechat){
-    this.wechat = wechat;
-    }
-
-    /**
-    * 电话
-    */
-    private void setPhone(String phone){
-    this.phone = phone;
-    }
-
-    /**
-    * 有效期天数
-    */
-    private void setValidDays(Integer validDays){
-    this.validDays = validDays;
-    }
-
-
-    /**
-    * 主键，课程id
-    */
-    private Long getId(){
-    return this.id;
-    }
-
-    /**
-    * 收费规则，对应数据字典
-    */
-    private String getCharge(){
-    return this.charge;
-    }
-
-    /**
-    * 现价
-    */
-    private Double getPrice(){
-    return this.price;
-    }
-
-    /**
-    * 原价
-    */
-    private Double getOriginalPrice(){
-    return this.originalPrice;
-    }
-
-    /**
-    * 咨询qq
-    */
-    private String getQq(){
-    return this.qq;
-    }
-
-    /**
-    * 微信
-    */
-    private String getWechat(){
-    return this.wechat;
-    }
-
-    /**
-    * 电话
-    */
-    private String getPhone(){
-    return this.phone;
-    }
-
-    /**
-    * 有效期天数
-    */
-    private Integer getValidDays(){
-    return this.validDays;
-    }
-
 }

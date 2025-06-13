@@ -3,6 +3,8 @@ package com.xuecheng.content.model.po;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
@@ -15,6 +17,7 @@ import java.io.Serializable;
 */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class CourseCategory implements Serializable {
 
     /**
@@ -64,103 +67,6 @@ public class CourseCategory implements Serializable {
     @ApiModelProperty("是否叶子")
     private Integer isLeaf;
 
-    /**
-    * 主键
-    */
-    private void setId(String id){
-    this.id = id;
-    }
 
-    /**
-    * 分类名称
-    */
-    private void setName(String name){
-    this.name = name;
-    }
-
-    /**
-    * 分类标签默认和名称一样
-    */
-    private void setLabel(String label){
-    this.label = label;
-    }
-
-    /**
-    * 父结点id（第一级的父节点是0，自关联字段id）
-    */
-    private void setParentid(String parentid){
-    this.parentid = parentid;
-    }
-
-    /**
-    * 是否显示
-    */
-    private void setIsShow(Integer isShow){
-    this.isShow = isShow;
-    }
-
-    /**
-    * 排序字段
-    */
-    private void setOrderby(Integer orderby){
-    this.orderby = orderby;
-    }
-
-    /**
-    * 是否叶子
-    */
-    private void setIsLeaf(Integer isLeaf){
-    this.isLeaf = isLeaf;
-    }
-
-
-    /**
-    * 主键
-    */
-    private String getId(){
-    return this.id;
-    }
-
-    /**
-    * 分类名称
-    */
-    private String getName(){
-    return this.name;
-    }
-
-    /**
-    * 分类标签默认和名称一样
-    */
-    private String getLabel(){
-    return this.label;
-    }
-
-    /**
-    * 父结点id（第一级的父节点是0，自关联字段id）
-    */
-    private String getParentid(){
-    return this.parentid;
-    }
-
-    /**
-    * 是否显示
-    */
-    private Integer getIsShow(){
-    return this.isShow;
-    }
-
-    /**
-    * 排序字段
-    */
-    private Integer getOrderby(){
-    return this.orderby;
-    }
-
-    /**
-    * 是否叶子
-    */
-    private Integer getIsLeaf(){
-    return this.isLeaf;
-    }
 
 }
