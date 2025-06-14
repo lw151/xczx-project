@@ -5,24 +5,27 @@ import com.xuecheng.base.model.PageParams;
 import com.xuecheng.base.model.PageResult;
 import com.xuecheng.content.model.dto.AddCourseDto;
 import com.xuecheng.content.model.dto.CourseBaseInfoDto;
+import com.xuecheng.content.model.dto.EditCourseDto;
 import com.xuecheng.content.model.dto.QueryCourseParamsDto;
 import com.xuecheng.content.model.po.CourseBase;
 import com.xuecheng.content.service.CourseBaseInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.Size;
 
 @Api(value = "课程信息管理接口", tags = "课程信息管理接口")
 @RestController
+@Slf4j
 public class CourseBaseInfoController {
 
     @Autowired
     private CourseBaseInfoService courseBaseInfoService;
-
+    private static final Long COMPANY_ID = 22L;
     @PostMapping("/course/list")
     @ApiOperation("课程查询接口")
     public PageResult<CourseBase> list(PageParams pageParams, @RequestBody QueryCourseParamsDto queryCourseParamsDto) {
@@ -35,6 +38,23 @@ public class CourseBaseInfoController {
         Long companyId = 22L;
         return courseBaseInfoService.createCourseBaseInfo(companyId, addCourseDto);
     }
+
+    @GetMapping("/course/{courseId}")
+    @ApiOperation("根据ID查询课程")
+    public CourseBaseInfoDto getCourseBaseInfoById(@PathVariable Long courseId) {
+        return courseBaseInfoService.getCourseBaseInfo(courseId);
+    }
+
+    @PutMapping("/course")
+    @ApiOperation("修改课程")
+    public CourseBaseInfoDto modifyCourseBase(@RequestBody @Validated(ValidationGroups.Update.class) EditCourseDto editCourseDto){
+        log.info("接收到编辑请求，数据:{}", editCourseDto);
+        if(editCourseDto.getId() == null){
+            log.warn("接受到的id为空!!!");
+        }
+        return courseBaseInfoService.updateCourseBase(COMPANY_ID,editCourseDto);
+    }
+
 
 
 }

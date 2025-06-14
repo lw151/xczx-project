@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 
 /**
@@ -20,17 +22,20 @@ public class CourseBaseInfoDto extends CourseBase {
  /**
   * 收费规则，对应数据字典
   */
+ @NotEmpty(message = "收费规则必须存在")
  private String charge;
 
  /**
   * 价格
   */
+ @Min(message = "价格错误",value = 0)
  private Float price;
 
 
  /**
   * 原价
   */
+ @Min(message = "价格错误",value = 0)
  private Float originalPrice;
 
  /**
@@ -56,11 +61,13 @@ public class CourseBaseInfoDto extends CourseBase {
  /**
   * 大分类名称
   */
+ @NotEmpty(message = "分类必须存在")
  private String mtName;
 
  /**
   * 小分类名称
   */
+ @NotEmpty(message = "分类必须存在")
  private String stName;
 
 }

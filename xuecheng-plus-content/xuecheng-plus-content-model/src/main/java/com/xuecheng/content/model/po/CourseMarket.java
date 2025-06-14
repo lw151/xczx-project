@@ -1,73 +1,65 @@
 package com.xuecheng.content.model.po;
 
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
-* 课程营销信息
-* @TableName course_market
-*/
+ * <p>
+ * 课程营销信息
+ * </p>
+ *
+ * @author itcast
+ */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@TableName("course_market")
 public class CourseMarket implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     /**
-    * 主键，课程id
-    */
-    @NotNull(message="[主键，课程id]不能为空")
-    @ApiModelProperty("主键，课程id")
+     * 主键，课程id
+     */
+    @TableId(value = "id")
     private Long id;
+
     /**
-    * 收费规则，对应数据字典
-    */
-    @NotBlank(message="[收费规则，对应数据字典]不能为空")
-    @Size(max= 32,message="编码长度不能超过32")
-    @ApiModelProperty("收费规则，对应数据字典")
-    @Length(max= 32,message="编码长度不能超过32")
+     * 收费规则，对应数据字典
+     */
     private String charge;
+
     /**
-    * 现价
-    */
-    @ApiModelProperty("现价")
+     * 现价
+     */
     private Float price;
+
     /**
-    * 原价
-    */
-    @ApiModelProperty("原价")
+     * 原价
+     */
     private Float originalPrice;
+
     /**
-    * 咨询qq
-    */
-    @Size(max= 32,message="编码长度不能超过32")
-    @ApiModelProperty("咨询qq")
-    @Length(max= 32,message="编码长度不能超过32")
+     * 咨询qq
+     */
     private String qq;
+
     /**
-    * 微信
-    */
-    @Size(max= 64,message="编码长度不能超过64")
-    @ApiModelProperty("微信")
-    @Length(max= 64,message="编码长度不能超过64")
+     * 微信
+     */
     private String wechat;
+
     /**
-    * 电话
-    */
-    @Size(max= 32,message="编码长度不能超过32")
-    @ApiModelProperty("电话")
-    @Length(max= 32,message="编码长度不能超过32")
+     * 电话
+     */
     private String phone;
+
     /**
-    * 有效期天数
-    */
-    @ApiModelProperty("有效期天数")
+     * 有效期天数
+     */
     private Integer validDays;
+
+
 }

@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.Validation;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -23,7 +24,7 @@ public class AddCourseDto {
     private String users;
 
     @ApiModelProperty(value = "课程标签")
-    @Size(message = "字数有误",min = 5,max = 200)
+    @Size(message = "字数有误",min = 5,max = 200,groups = {ValidationGroups.Insert.class})
     private String tags;
 
     @ApiModelProperty(value = "大分类", required = true)
@@ -49,6 +50,8 @@ public class AddCourseDto {
     private String charge;
 
     @ApiModelProperty(value = "价格")
+    @Min(message = "价格错误",value = 0,groups = {ValidationGroups.Insert.class})
+    @Min(message = "价格错误",value = 0,groups = {ValidationGroups.Update.class})
     private Float price;
 
     @ApiModelProperty(value = "原价")
