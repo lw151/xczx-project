@@ -102,25 +102,7 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseCategoryMapper,
         return getCourseBaseInfo(courseId);
     }
 
-    /*保存课程营销数据*/
-    private int saveCourseMarket(CourseMarket newCourseMarket) {
-        String charge = newCourseMarket.getCharge();
-        if (StringUtils.isEmpty(charge)) {
-            throw new RuntimeException("收费规则为空");
-        }
-        if (charge.equals("201000") && newCourseMarket.getPrice() != 0.0f) {
-            XueChengPlusException.cast("免费价格应该为0");
-        }
-        if (charge.equals("201001") && newCourseMarket.getPrice() == 0.0f) {
-            XueChengPlusException.cast("收费价格不应为0");
-        }
-        CourseMarket selectCourseMarket = courseMarketMapper.selectById(newCourseMarket.getId());
-        if (selectCourseMarket == null) {
-            return courseMarketMapper.insert(newCourseMarket);
-        } else {
-            return courseMarketMapper.updateById(newCourseMarket);
-        }
-    }
+//
 
     /*组装课程信息*/
     public CourseBaseInfoDto getCourseBaseInfo(Long courseId) {

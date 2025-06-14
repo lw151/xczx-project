@@ -10,11 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * <p>
  * 课程基本信息
- * </p>
- *
- * @author itcast
  */
 @Data
 @TableName("course_base")
