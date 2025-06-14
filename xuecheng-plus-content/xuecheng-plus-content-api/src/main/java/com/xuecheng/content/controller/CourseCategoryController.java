@@ -15,10 +15,13 @@ import java.util.List;
 public class CourseCategoryController {
     @Autowired
     private CourseCategoryService courseCategoryService;
+    //根节点ID
+    private static final String CATEGORY_ID="1";
+
 
     @GetMapping("/course-category/tree-nodes")
     public List<CourseCategoryTreeDto> queryTreeNodes() {
-        return courseCategoryService.queryTreeDto("1");
+        return courseCategoryService.queryTreeDto(CATEGORY_ID);
     }
 
 }
