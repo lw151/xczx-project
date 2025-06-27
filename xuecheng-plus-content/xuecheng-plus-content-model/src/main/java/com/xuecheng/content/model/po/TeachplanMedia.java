@@ -2,6 +2,7 @@ package com.xuecheng.content.model.po;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 
  */
 @Data
+@Setter
 @TableName("teachplan_media")
 public class TeachplanMedia implements Serializable {
 
@@ -54,6 +56,5 @@ public class TeachplanMedia implements Serializable {
      * 修改人
      */
     private String changePeople;
-
 
 }

@@ -2,17 +2,16 @@ package com.xuecheng.content.model.po;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * <p>
  * 课程计划
- * </p>
- *
  */
 @Data
+@Setter
 @TableName("teachplan")
 public class Teachplan implements Serializable {
 
