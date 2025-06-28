@@ -156,8 +156,6 @@ public class TeachplanServiceImpl implements TeachplanService {
 
     /**
      * 交换两个Teachplan的orderby
-     * @param teachplan
-     * @param tmp
      */
     private void exchangeOrderby(Teachplan teachplan, Teachplan tmp) {
         if (tmp == null)

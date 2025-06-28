@@ -6,16 +6,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xuecheng.base.exception.XueChengPlusException;
 import com.xuecheng.base.model.PageParams;
 import com.xuecheng.base.model.PageResult;
-import com.xuecheng.content.mapper.CourseBaseMapper;
-import com.xuecheng.content.mapper.CourseCategoryMapper;
-import com.xuecheng.content.mapper.CourseMarketMapper;
+import com.xuecheng.content.mapper.*;
 import com.xuecheng.content.model.dto.AddCourseDto;
 import com.xuecheng.content.model.dto.CourseBaseInfoDto;
 import com.xuecheng.content.model.dto.EditCourseDto;
 import com.xuecheng.content.model.dto.QueryCourseParamsDto;
-import com.xuecheng.content.model.po.CourseBase;
-import com.xuecheng.content.model.po.CourseCategory;
-import com.xuecheng.content.model.po.CourseMarket;
+import com.xuecheng.content.model.po.*;
 import com.xuecheng.content.service.CourseBaseInfoService;
 import com.xuecheng.content.service.CourseMarkService;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +35,10 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseCategoryMapper,
     private CourseCategoryMapper courseCategoryMapper;
     @Autowired
     private CourseMarkService courseMarkService;
+    @Autowired
+    private CourseTeacherMapper courseTeacherMapper;
+    @Autowired
+    private TeachplanMapper teachplanMapper;
 
     /*
      * 分页查询课程信息
@@ -80,8 +80,8 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseCategoryMapper,
         newCourseBase.setStatus("203001");//发布状态默认为未发布
         newCourseBase.setCompanyId(companyId);//设置机构ID
         newCourseBase.setCreateDate(LocalDateTime.now());//设置创建时间
-        int insert=courseBaseMapper.insert(newCourseBase);
-        Long courseId=newCourseBase.getId();
+        int insert = courseBaseMapper.insert(newCourseBase);
+        Long courseId = newCourseBase.getId();
         //向课程营销表course_market填入数据
         CourseMarket newCourseMarket = new CourseMarket();
         BeanUtils.copyProperties(addCourseDto, newCourseMarket);
@@ -163,5 +163,25 @@ public class CourseBaseInfoServiceImpl extends ServiceImpl<CourseCategoryMapper,
         // 有则更新，无则插入
         courseMarkService.updateOrSave(courseMarket);
         return getCourseBaseInfo(courseId);
+    }
+
+    @Transactional
+    @Override
+    public void delectCourse(Long companyId, Long courseId) {
+        CourseBase courseBase = courseBaseMapper.selectById(courseId);
+        if (!companyId.equals(courseBase.getCompanyId()))
+            XueChengPlusException.cast("只允许删除本机构的课程");
+        // 删除课程教师信息
+        LambdaQueryWrapper<CourseTeacher> teacherLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        teacherLambdaQueryWrapper.eq(CourseTeacher::getCourseId, courseId);
+        courseTeacherMapper.delete(teacherLambdaQueryWrapper);
+        // 删除课程计划
+        LambdaQueryWrapper<Teachplan> teachplanLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        teachplanLambdaQueryWrapper.eq(Teachplan::getCourseId, courseId);
+        teachplanMapper.delete(teachplanLambdaQueryWrapper);
+        // 删除营销信息
+        courseMarketMapper.deleteById(courseId);
+        // 删除课程基本信息
+        courseBaseMapper.deleteById(courseId);
     }
 }
