@@ -12,4 +12,6 @@ public interface TeachplanService {
      void saveTeachplan(SaveTeachplanDto teachplanDto);
 
      void deleteTeachplan(Long teachplanId);
+
+     void orderByTeachplan(String moveType, Long teachplanId);
 }
