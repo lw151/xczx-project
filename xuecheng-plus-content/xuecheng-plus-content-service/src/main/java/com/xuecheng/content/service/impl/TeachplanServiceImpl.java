@@ -1,7 +1,6 @@
 package com.xuecheng.content.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.xuecheng.base.exception.RestErrorResponse;
 import com.xuecheng.base.exception.XueChengPlusException;
 import com.xuecheng.content.mapper.TeachplanMapper;
 import com.xuecheng.content.mapper.TeachplanMediaMapper;
@@ -69,24 +68,24 @@ public class TeachplanServiceImpl implements TeachplanService {
     @Transactional(rollbackFor = Exception.class)
     public void deleteTeachplan(Long teachplanId) {
         Teachplan teachplan = teachplanMapper.selectById(teachplanId);
-        if(teachplan == null){
+        if (teachplan == null) {
             XueChengPlusException.cast("参数错误，对象值为空");
         }
         Integer grade = teachplan.getGrade();
-        if(grade==2){
+        if (grade == 2) {
             //课程计划为节
             teachplanMapper.deleteById(teachplanId);
-            if(teachplanMediaMapper.selectById(teachplanId) != null){
+            if (teachplanMediaMapper.selectById(teachplanId) != null) {
                 LambdaQueryWrapper<TeachplanMedia> wrapper = new LambdaQueryWrapper<>();
                 wrapper.eq(TeachplanMedia::getTeachplanId, teachplanId);
                 teachplanMediaMapper.delete(wrapper);
             }
-        }else {
+        } else {
             //课程计划为章
             LambdaQueryWrapper<Teachplan> wrapper = new LambdaQueryWrapper<>();
-            wrapper.eq(Teachplan::getParentid,teachplanId);
+            wrapper.eq(Teachplan::getParentid, teachplanId);
             List<Teachplan> teachplanList = teachplanMapper.selectList(wrapper);
-            if(!teachplanList.isEmpty()){
+            if (!teachplanList.isEmpty()) {
                 XueChengPlusException.cast("课程计划还有子章节");
             }
             teachplanMapper.deleteById(teachplanId);
