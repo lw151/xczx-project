@@ -2,9 +2,11 @@
 package com.xuecheng.base.exception;
 
 
-/**
- * @description 通用错误信息
+import lombok.Getter;
+
+/**通用错误信息
  */
+@Getter
 public enum CommonError {
 
 	UNKOWN_ERROR("执行过程异常，请重试"),
@@ -13,13 +15,9 @@ public enum CommonError {
 	QUERY_NULL("查询结果为空"),
 	REQUEST_NULL("请求参数为空");
 
-	private String errMessage;
+	private final String errMessage;
 
-	public String getErrMessage() {
-		return errMessage;
-	}
-
-	private CommonError( String errMessage) {
+    private CommonError( String errMessage) {
 		this.errMessage = errMessage;
 	}
 

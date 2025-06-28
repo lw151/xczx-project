@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@RestControllerAdvice
+@RestControllerAdvice //全局拦截异常
 public class GlobalExceptionHandler {
 
 

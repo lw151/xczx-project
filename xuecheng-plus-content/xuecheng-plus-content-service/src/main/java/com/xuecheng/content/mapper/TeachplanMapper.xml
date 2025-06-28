@@ -25,16 +25,16 @@
             <result column="two_mediaType"   property="mediaType" />
             <result column="two_startTime"   property="startTime" />
             <result column="two_endTime"   property="endTime" />
-            <result column="two_orderby"   property="orderby" />
+            <result column="one_orderby"   property="orderby" />
             <result column="two_courseId"   property="courseId" />
             <result column="two_coursePubId"   property="coursePubId" />
+            <!--todo参数变量爆红-->
             <association property="teachplanMedia" javaType="com.xuecheng.content.model.po.TeachplanMedia">
                 <id column="teachplanMediaId"   property="id" />
                 <result column="mediaFilename"   property="mediaFilename" />
                 <result column="mediaId"   property="mediaId" />
-                <result column="two_id"   property="teachplanId" />
-                <result column="two_courseId"   property="courseId" />
-                <result column="two_coursePubId"   property="coursePubId" />
+                <result column="media_teachplanId"   property="teachplanId" />
+                <result column="media_courseId"   property="courseId" />
             </association>
         </collection>
     </resultMap>
@@ -63,8 +63,9 @@
             two.course_pub_id  two_coursePubId,
             m1.media_fileName  mediaFilename,
             m1.id              teachplanMediaId,
-            m1.media_id        mediaId
-
+            m1.media_id        mediaId,
+            m1.course_id       media_courseId,
+            m1.teachplan_id    media_teachplanId
         from teachplan one
                  LEFT JOIN teachplan two on one.id = two.parentid
                  LEFT JOIN teachplan_media m1 on m1.teachplan_id = two.id

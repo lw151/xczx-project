@@ -22,6 +22,7 @@ public class MqMessageHistory implements Serializable {
     /**
     * 消息id
     */
+
     @NotNull(message="[消息id]不能为空")
     @ApiModelProperty("消息id")
     private Long id;
